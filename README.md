@@ -3,12 +3,8 @@ Setup
 ---
 
 ```
-$ virtualenv flask
-$ flask/bin/pip install flask
-$ flask/bin/pip install flask-socketio
-$ flask/bin/pip install socketIO-client
-$ . flask/bin/activate
+wget http://nodejs.org/dist/v0.10.35/node-v0.10.35.tar.gz
+tar zxvf node-v0.10.35.tar.gz
+cd node-v0.10.35
+./configure && make && sudo make install 
 ```
-
-
-

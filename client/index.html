@@ -1,38 +1,57 @@
 <html>
 <!DOCTYPE html>
+<!--vim: set ts=4 sw=4 et:-->
 <meta charset="utf-8">
 <meta name="viewport" content="width=800">
 
 <style>
 html {
-  width: 800px;
-  margin: 0;
+    margin: 0;
+    border: 50px; 
 }
 
 body {
-  font: 16px/1.5em "Helvetica Neue", Helvetica, sans-serif;
-  margin: 1em 0 4em 0;
+    font: 16px/1.5em "Helvetica Neue", Helvetica, sans-serif;
+    margin: 1em 0 4em 0;
+}
+
+#main {
+    padding: 50px;
 }
 </style>
 
 <div id="main">
-Foo..
+    Foo..
+    <br>
+    <img src=""> 
 </div>
 
 </html>
 
 <script src="/socket.io/socket.io.js"></script>
+<script src="js/d3.min.js"></script>
 <script>
-var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+var socket = io.connect('http://' + document.domain + ':' + location.port),
+    log = function(msg) { console.log(">> " + msg); };
+
+var b64header = 'data:image/jpeg;base64,';
 
 socket.on('connect', function() {
-  console.log("I am in <connect>");
-  socket.emit('foo', 'david');
+    log("Connected");
+    socket.emit('image');
 });
 
-socket.on('bar', function(data) {
-  console.log("Got something from server: " + data);
+socket.on('answer-image', function(data) {
+    if (data.error !== 0)
+        log("Problems running toggle in server ");
+    else 
+        //d3.select("img").attr('src', 'data:image/jpeg;base64,' + data.payload);
+        console.log(data.payload.indexOf('\n'));
+        d3.select("img").attr('src', b64header + data.payload);
 });
+
+// d3.select("img").attr('src', b64img);
 
 </script>
 
