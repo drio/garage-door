@@ -1,0 +1,38 @@
+<html>
+<!DOCTYPE html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=800">
+
+<style>
+html {
+  width: 800px;
+  margin: 0;
+}
+
+body {
+  font: 16px/1.5em "Helvetica Neue", Helvetica, sans-serif;
+  margin: 1em 0 4em 0;
+}
+</style>
+
+<div id="main">
+Foo..
+</div>
+
+</html>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+socket.on('connect', function() {
+  console.log("I am in <connect>");
+  socket.emit('foo', 'david');
+});
+
+socket.on('bar', function(data) {
+  console.log("Got something from server: " + data);
+});
+
+</script>
+
