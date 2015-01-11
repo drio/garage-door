@@ -15,15 +15,22 @@ body {
     margin: 1em 0 4em 0;
 }
 
+#image-area {
+    margin-top: 10px;    
+}
+
 #main {
     padding: 50px;
 }
 </style>
 
 <div id="main">
-    Foo..
-    <br>
-    <img src=""> 
+    <div id="buttons">
+        <button id="toggle">toggle</button>
+        <button id="capture">capture</button>
+    </div>
+    <div id="image-area"> <img src="" alt=""> </div>
+    <p id="info"> Ready.
 </div>
 
 </html>
@@ -32,25 +39,40 @@ body {
 <script src="js/d3.min.js"></script>
 <script>
 
-var socket = io.connect('http://' + document.domain + ':' + location.port),
-    log = function(msg) { console.log(">> " + msg); };
+var socket    = io.connect('http://' + document.domain + ':' + location.port),
+    log       = function(msg) { console.log(">> " + msg); },
+    b64header = 'data:image/jpeg;base64,',
+    info      = d3.select("#info");
 
-var b64header = 'data:image/jpeg;base64,';
+d3.select("#toggle").on('click', function() {
+    log("clicked toggle");
+    socket.emit('toggle');
+});
+
+
+d3.select("#capture").on('click', function() {
+    log("clicked capture");
+    socket.emit('image');
+});
+
 
 socket.on('connect', function() {
     log("Connected");
-    socket.emit('image');
 });
 
 socket.on('answer-image', function(data) {
     if (data.error !== 0)
-        log("Problems running toggle in server ");
+        log("Problems capturing image in server ");
     else 
-        console.log(data.payload.indexOf('\n'));
         d3.select("img").attr('src', b64header + data.payload);
 });
 
-// d3.select("img").attr('src', b64img);
+socket.on('answer-toggle', function(data) {
+    if (data.error !== 0)
+        log("Problems running toggle in server ");
+    else 
+        info.html('Toogle OK from server: ' + Date(Date.now())); 
+});
 
 </script>
 

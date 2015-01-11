@@ -43,7 +43,7 @@ image() {
 }
 
 toggle() {
-    if [ $os == "Darwin" ];then
+    if [ $os == "Linux" ];then
         check gpio
         sudo gpio write 7 0 ; sleep 1; sudo gpio write 7 1
     fi 
