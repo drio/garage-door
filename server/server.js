@@ -16,7 +16,8 @@ function log(msg) {
 
 
 io.sockets.on('connection', function (socket) {
-    var cmds = { 'toggle': 'ls -lac', 'image': "./scripts/take_image.sh" }, 
+    var script = "./scripts/doit.sh ",
+        cmds = { 'toggle': script + " toggle" , 'image': script + " image" }, 
         running = false;
 
     function runCmd(eventName) {
