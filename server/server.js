@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* vim: set ts=4 sw=4 et: */
 
-var express = require('express'),
+var port = 8080,
+    express = require('express'),
     app = express(),
     http = require('http').createServer(app),
     io = require('socket.io').listen(http),
@@ -43,6 +44,6 @@ io.sockets.on('connection', function (socket) {
 });
 
 
-log("Work dir: " + process.cwd());
+log("Work dir: " + process.cwd() + "| Port: " + port);
 app.use('/', express.static(__dirname + '/../client'));
-http.listen(8000);
+http.listen(port);
