@@ -45,13 +45,13 @@ var socket    = io.connect('http://' + document.domain + ':' + location.port),
     info      = d3.select("#info");
 
 d3.select("#toggle").on('click', function() {
-    log("clicked toggle");
+    info.html("Toggling ...");
     socket.emit('toggle');
 });
 
 
 d3.select("#capture").on('click', function() {
-    log("clicked capture");
+    info.html("Adquiring image ...");
     socket.emit('image');
 });
 
@@ -62,14 +62,16 @@ socket.on('connect', function() {
 
 socket.on('answer-image', function(data) {
     if (data.error !== 0)
-        log("Problems capturing image in server ");
-    else 
+        info.html("Problems capturing image in server ");
+    else {
+        info.html("");
         d3.select("img").attr('src', b64header + data.payload);
+    }
 });
 
 socket.on('answer-toggle', function(data) {
     if (data.error !== 0)
-        log("Problems running toggle in server ");
+        info.html("Problems running toggle in server ");
     else 
         info.html('Toogle OK from server: ' + Date(Date.now())); 
 });

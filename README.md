@@ -1,4 +1,4 @@
-## Very simple way to control and monitor your garage with Raspberry PI
+### Very simple way to control and monitor your garage with Raspberry PI
 
 ![](http://f.cl.ly/items/2A1Z0y1L2T1w43450a24/Screen%20Shot%202015-01-11%20at%2012.24.45.png)
 
@@ -8,7 +8,7 @@ Intro
 
 This is a simple webapp to control your garage door using: 
 
-    - improve readme
+    - improve readme (other dendencies)
     - raspberry [pi](http://www.raspberrypi.org/)
     - linux
     - nodejs (express, socketio)
