@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <!--vim: set ts=4 sw=4 et:-->
 <meta charset="utf-8">
-<meta name="viewport" content="width=800">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <style>
 html {
@@ -15,12 +16,22 @@ body {
     margin: 1em 0 4em 0;
 }
 
+@media only screen and (max-width: 600px) {
+  p {
+    background-color: red;
+  }
+}
+
+img {
+  width: 100%;
+}
+
 #image-area {
-    margin-top: 10px;    
+    margin-top: 5px;    
 }
 
 #main {
-    padding: 50px;
+    padding: 10px;
 }
 </style>
 
