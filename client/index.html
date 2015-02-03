@@ -4,44 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="stylesheet" href="bootstrap-3.3.2-dist/css/bootstrap.min.css">
 
 <style>
-html {
-    margin: 0;
-    border: 50px; 
-}
-
-body {
-    font: 16px/1.5em "Helvetica Neue", Helvetica, sans-serif;
-    margin: 1em 0 4em 0;
-}
-
-@media only screen and (max-width: 600px) {
-  p {
-    background-color: red;
-  }
-}
-
-img {
-  width: 100%;
-}
-
-#image-area {
-    margin-top: 5px;    
-}
-
-#main {
-    padding: 10px;
+* {
+  padding: 5px;
 }
 </style>
 
-<div id="main">
-    <div id="buttons">
-        <button id="toggle">toggle</button>
-        <button id="capture">capture</button>
+<div class="container" id="main">
+    <div class="row "id="buttons">
+        <button id="toggle" class="btn btn-default">toggle</button>
+        <button id="capture" class="btn btn-primary">capture</button>
     </div>
-    <div id="image-area"> <img src="" alt=""> </div>
-    <p id="info"> Ready.
+    <div class="row" id="image-area"> <img src="" alt="" class="img-responsive"> </div>
+    <div class="row" id="info"> Ready. </div>
 </div>
 
 </html>
@@ -76,7 +53,8 @@ socket.on('answer-image', function(data) {
         info.html("Problems capturing image in server ");
     else {
         info.html("");
-        d3.select("img").attr('src', b64header + data.payload);
+        d3.select("img")
+          .attr('src', b64header + data.payload);
     }
 });
 
