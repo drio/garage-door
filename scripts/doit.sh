@@ -45,7 +45,8 @@ image() {
 toggle() {
     if [ $os == "Linux" ];then
         check gpio
-        sudo gpio write 7 0 ; sleep 1; sudo gpio write 7 1
+        gpio -g mode 4 out 
+        gpio -g write 4 0 ;  sleep 1; gpio -g write 4 1
     fi 
 }
 
